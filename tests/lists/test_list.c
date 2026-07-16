@@ -4,8 +4,7 @@
 
 #include "lists/list.h"
 
-static void test_list_init(void)
-{
+static void test_list_init(void) {
     List list;
 
     list_init(&list, free);
@@ -17,8 +16,7 @@ static void test_list_init(void)
     list_destroy(&list);
 }
 
-static void test_insert_one_element(void)
-{
+static void test_insert_one_element(void) {
     List list;
     int *value;
 
@@ -40,8 +38,7 @@ static void test_insert_one_element(void)
     list_destroy(&list);
 }
 
-static void test_insert_two_elements(void)
-{
+static void test_insert_two_elements(void) {
     List list;
     int *value1, *value2;
 
@@ -67,8 +64,7 @@ static void test_insert_two_elements(void)
     list_destroy(&list);
 }
 
-static void test_remove_after_head(void)
-{
+static void test_remove_after_head(void) {
     List list;
     int *value1, *value2;
     int *data;
@@ -101,8 +97,7 @@ static void test_remove_after_head(void)
     list_destroy(&list);
 }
 
-static void test_list_destroy(void)
-{
+static void test_list_destroy(void) {
     List list;
     int *value;
 
@@ -122,8 +117,7 @@ static void test_list_destroy(void)
     assert(list_tail(&list) == NULL);
 }
 
-int main(void)
-{
+int main(void) {
     test_list_init();
     test_insert_one_element();
     test_insert_two_elements();

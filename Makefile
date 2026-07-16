@@ -2,8 +2,11 @@
 .SECONDARY:
 
 CC = gcc
-CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -fPIC
+CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -fPIC -MMD -MP
 CPPFLAGS = -Iinclude
+
+AR = ar
+ARFLAGS = rcs
 
 LDFLAGS =
 LDLIBS =
@@ -29,10 +32,18 @@ TESTDIR = $(BINDIR)/tests
 OBJTESTDIR = $(OBJDIR)/tests
 
 OBJECTS = \
-	$(OBJDIR)/lists/list.o
+	$(OBJDIR)/lists/list.o \
+	$(OBJDIR)/lists/dlist.o
+
+DEPS = $(OBJECTS:.o=.d)
 
 TESTS = \
-	$(TESTDIR)/lists/test_list
+	$(TESTDIR)/lists/test_list \
+	$(TESTDIR)/lists/test_dlist
+
+TESTOBJECTS := $(patsubst $(TESTDIR)/%, $(OBJTESTDIR)/%.o, $(TESTS))
+
+TESTDEPS := $(TESTOBJECTS:.o=.d)
 
 all: $(LIBDIR)/libdsa.so $(LIBDIR)/libdsa.a
 
@@ -40,7 +51,7 @@ $(LIBDIR)/libdsa.so: $(OBJECTS) | $(LIBDIR)
 	$(LINK.c) -shared $^ $(LDLIBS) -o $@
 
 $(LIBDIR)/libdsa.a: $(OBJECTS) | $(LIBDIR)
-	ar rcs $@ $^
+	$(AR) $(ARFLAGS) $@ $?
 
 $(OBJDIR)/%.o: src/%.c | $(OBJDIR)
 	@mkdir -p $(dir $@)
@@ -78,3 +89,5 @@ $(OBJTESTDIR)/%.o: tests/%.c | $(OBJTESTDIR)
 
 clean:
 	rm -rf build
+
+-include $(DEPS) $(TESTDEPS)
