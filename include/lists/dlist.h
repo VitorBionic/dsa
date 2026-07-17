@@ -12,7 +12,7 @@ typedef struct DListElmt_ {
 typedef struct DList_ {
     int size;
 
-    int (*match) (const void *key1, const void *key2);
+    int (*match)(const void *key1, const void *key2);
     void (*destroy)(void *data);
     
     DListElmt *head;
