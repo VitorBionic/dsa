@@ -34,14 +34,16 @@ OBJTESTDIR = $(OBJDIR)/tests
 OBJECTS = \
 	$(OBJDIR)/lists/list.o \
 	$(OBJDIR)/lists/dlist.o \
-	$(OBJDIR)/lists/clist.o
+	$(OBJDIR)/lists/clist.o \
+	$(OBJDIR)/stacks/stack.o
 
 DEPS = $(OBJECTS:.o=.d)
 
 TESTS = \
 	$(TESTDIR)/lists/test_list \
 	$(TESTDIR)/lists/test_dlist \
-	$(TESTDIR)/lists/test_clist
+	$(TESTDIR)/lists/test_clist \
+	$(TESTDIR)/stacks/test_stack
 
 TESTOBJECTS := $(patsubst $(TESTDIR)/%, $(OBJTESTDIR)/%.o, $(TESTS))
 
