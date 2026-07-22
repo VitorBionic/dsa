@@ -35,7 +35,8 @@ OBJECTS = \
 	$(OBJDIR)/lists/list.o \
 	$(OBJDIR)/lists/dlist.o \
 	$(OBJDIR)/lists/clist.o \
-	$(OBJDIR)/stacks/stack.o
+	$(OBJDIR)/stacks/stack.o \
+	$(OBJDIR)/queues/queue.o
 
 DEPS = $(OBJECTS:.o=.d)
 
@@ -43,7 +44,9 @@ TESTS = \
 	$(TESTDIR)/lists/test_list \
 	$(TESTDIR)/lists/test_dlist \
 	$(TESTDIR)/lists/test_clist \
-	$(TESTDIR)/stacks/test_stack
+	$(TESTDIR)/stacks/test_stack \
+	$(TESTDIR)/queues/test_queue
+
 
 TESTOBJECTS := $(patsubst $(TESTDIR)/%, $(OBJTESTDIR)/%.o, $(TESTS))
 
